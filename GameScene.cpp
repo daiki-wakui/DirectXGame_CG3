@@ -11,6 +11,8 @@ GameScene::~GameScene()
 {
 	delete spriteBG;
 	delete object3d;
+	delete sprite1;
+	delete sprite2;
 }
 
 void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
@@ -29,6 +31,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 
 	// テクスチャ読み込み
 	Sprite::LoadTexture(1, L"Resources/background.png");
+
+	Sprite::LoadTexture(2, L"Resources/texture.png");
+
+	sprite1 = Sprite::Create(2, { 0,0 });
+	sprite2 = Sprite::Create(2, { 500,500 }, { 1,0,0,1 }, { 0,0 }, false, true);
 
 	// 背景スプライト生成
 	spriteBG = Sprite::Create(1, { 0.0f,0.0f });
@@ -55,6 +62,13 @@ void GameScene::Update()
 		object3d->SetPosition(position);
 	}
 
+	//スペースを押してる間右にすすむ
+	if (input->PushKey(DIK_SPACE)) {
+		XMFLOAT2 position = sprite1->GetPosition();
+		position.x += 1.0f;
+		sprite1->SetPosition(position);
+	}
+
 	// カメラ移動
 	if (input->PushKey(DIK_W) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_A))
 	{
@@ -77,6 +91,9 @@ void GameScene::Draw()
 	Sprite::PreDraw(cmdList);
 	// 背景スプライト描画
 	spriteBG->Draw();
+
+	sprite1->Draw();
+	sprite2->Draw();
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
