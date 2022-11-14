@@ -26,7 +26,11 @@ void main(
 	//4頂点まわす
 	for (uint i = 0; i < vnum; i++) {
 		//ワールド座標ベースで、ずらす
-		float4 offset = mul(matBillboard, offset_arrey[i]);
+		float4 offset;
+		//offset = mul(matBillboard, offset_arrey[i]);
+		offset = offset_arrey[i] * input[0].scale;
+		offset = mul(matBillboard, offset);
+
 		element.svpos = input[0].pos + offset;
 		//ビュー、射影変換
 		element.svpos = mul(mat, element.svpos);
