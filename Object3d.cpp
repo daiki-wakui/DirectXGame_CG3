@@ -340,7 +340,7 @@ void Object3d::LoadTexture()
 	ScratchImage scratchImg{};
 
 	// WICテクスチャのロード
-	result = LoadFromWICFile( L"Resources/tex1.png", WIC_FLAGS_NONE, &metadata, scratchImg);
+	result = LoadFromWICFile( L"Resources/hosi.jpg", WIC_FLAGS_NONE, &metadata, scratchImg);
 	assert(SUCCEEDED(result));
 
 	ScratchImage mipChain{};
@@ -647,10 +647,10 @@ void Object3d::UpdateViewMatrix()
 #pragma region  全方向ビルボード行列の計算
 
 	//ビルボード行列
-	/*matBillborad.r[0] = cameraAxisX;
+	matBillborad.r[0] = cameraAxisX;
 	matBillborad.r[1] = cameraAxisY;
 	matBillborad.r[2] = cameraAxisZ;
-	matBillborad.r[3] = XMVectorSet(0, 0, 0, 1);*/
+	matBillborad.r[3] = XMVectorSet(0, 0, 0, 1);
 
 #pragma region
 
@@ -695,7 +695,7 @@ bool Object3d::Initialize()
 	return true;
 }
 
-void Object3d::Update()
+void Object3d::Update(int isBlibord)
 {
 	HRESULT result;
 	XMMATRIX matScale, matRot, matTrans;
@@ -711,7 +711,9 @@ void Object3d::Update()
 	// ワールド行列の合成
 	matWorld = XMMatrixIdentity(); // 変形をリセット
 
-	matWorld *= matBillboradY;
+	if (isBlibord == true) {
+		matWorld *= matBillborad;
+	}
 
 	matWorld *= matScale; // ワールド行列にスケーリングを反映
 	matWorld *= matRot; // ワールド行列に回転を反映

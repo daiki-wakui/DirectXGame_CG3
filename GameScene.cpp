@@ -30,7 +30,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 	debugText.Initialize(debugTextTexNumber);
 
 	// テクスチャ読み込み
-	Sprite::LoadTexture(1, L"Resources/background.png");
+	Sprite::LoadTexture(1, L"Resources/b.jpg");
 
 	Sprite::LoadTexture(2, L"Resources/texture.png");
 
@@ -41,7 +41,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 	spriteBG = Sprite::Create(1, { 0.0f,0.0f });
 	// 3Dオブジェクト生成
 	object3d = Object3d::Create();
-	object3d->Update();
+
+	BilbordObj2 = Object3d::Create();
+	BilbordObj2->SetPosition(XMFLOAT3(20, 0, 0));
+	BilbordObj3 = Object3d::Create();
+	BilbordObj3->SetPosition(XMFLOAT3(-20, 0, 0));
 }
 
 void GameScene::Update()
@@ -78,7 +82,9 @@ void GameScene::Update()
 		else if (input->PushKey(DIK_A)) { Object3d::CameraMoveEyeVector({ -1.0f,0.0f,0.0f }); }
 	}
 
-	object3d->Update();
+	object3d->Update(1);
+	BilbordObj2->Update(0);
+	BilbordObj3->Update(0);
 }
 
 void GameScene::Draw()
@@ -111,6 +117,8 @@ void GameScene::Draw()
 
 	// 3Dオブクジェクトの描画
 	object3d->Draw();
+	BilbordObj2->Draw();
+	BilbordObj3->Draw();
 
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
