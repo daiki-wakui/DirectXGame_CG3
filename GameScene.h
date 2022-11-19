@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "ParticleManager.h"
 #include "DebugText.h"
+#include "Object3d.h"
 
 /// <summary>
 /// ゲームシーン
@@ -62,7 +63,19 @@ private: // メンバ変数
 	Sprite* spriteBG = nullptr;
 	ParticleManager* particleMan = nullptr;
 
+	Object3d* object3d = nullptr;
+	Object3d* BilbordObj2 = nullptr;
+	Object3d* BilbordObj3 = nullptr;
+
 	Sprite* sprite1 = nullptr;
 	Sprite* sprite2 = nullptr;
+
+
+	XMFLOAT3 pos{ 0,20,40 };
+	XMFLOAT3 pos2{ 0,20,0 };
+	XMFLOAT3 pos3{ 0,20,0 };
+
+	bool isPar = false;
+	int state;
 };
 
