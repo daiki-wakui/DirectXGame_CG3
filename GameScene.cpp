@@ -92,8 +92,8 @@ void GameScene::Draw()
 	// 背景スプライト描画
 	spriteBG->Draw();
 
-	sprite1->Draw();
-	sprite2->Draw();
+	/*sprite1->Draw();
+	sprite2->Draw();*/
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
